@@ -8730,6 +8730,40 @@ OSSL_PROVIDER_get0_name(const OSSL_PROVIDER *prov)
 int
 OSSL_PROVIDER_self_test(const OSSL_PROVIDER *prov)
 
+int
+OSSL_LIB_CTX_load_config(SV *libctx, const char *config_file)
+    PREINIT:
+        OSSL_LIB_CTX *ctx = NULL;
+    CODE:
+        if (libctx != &PL_sv_undef)
+        ctx = INT2PTR(OSSL_LIB_CTX *, SvIV(libctx));
+        RETVAL = OSSL_LIB_CTX_load_config(ctx, config_file);
+    OUTPUT:
+        RETVAL
+
+int
+EVP_default_properties_is_fips_enabled(SV *libctx)
+    PREINIT:
+        OSSL_LIB_CTX *ctx = NULL;
+    CODE:
+        if (libctx != &PL_sv_undef)
+        ctx = INT2PTR(OSSL_LIB_CTX *, SvIV(libctx));
+        RETVAL = EVP_default_properties_is_fips_enabled(ctx);
+    OUTPUT:
+        RETVAL
+
+int
+OSSL_PROVIDER_set_default_search_path(SV *libctx, const char *path)
+    PREINIT:
+        OSSL_LIB_CTX *ctx = NULL;
+    CODE:
+        if (libctx != &PL_sv_undef)
+        ctx = INT2PTR(OSSL_LIB_CTX *, SvIV(libctx));
+
+        RETVAL = OSSL_PROVIDER_set_default_search_path(ctx, path);
+    OUTPUT:
+        RETVAL
+
 #endif
 
 #define REM_EOF "/* EOF - SSLeay.xs */"
