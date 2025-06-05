@@ -28,6 +28,10 @@ Revision history for Perl extension Net::SSLeay.
 	  WriteMakefile() or appending them to 'perl Makefile.PL ...'
 	  DEFINE argument. CCFLAG problem diagnosed by Craig
 	  Barry. Fixes by Craig Barry and Heikki Vatiainen.
+	- Expose additional OpenSSL 3.0 functions
+	  OSSL_LIB_CTX_load_config, EVP_default_properties_is_fips_enabled,
+	  and OSSL_PROVIDER_set_default_search_path.
+
 
 1.94 2024-01-08
 	- New stable release incorporating all changes from developer releases 1.93_01
