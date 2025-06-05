@@ -1695,6 +1695,23 @@ Check openssl doc L<https://www.openssl.org/docs/manmaster/man3/ENGINE_by_id.htm
 
 =back
 
+=head3 Low level API: EVP_default_* related functions
+
+=over
+
+=item * EVP_default_properties_is_fips_enabled
+
+Indicates if 'fips=yes' is a default property for the given libctx.
+
+    my $rv = Net::SSLeay::EVP_default_properties_is_fips_enabled( $libctx );
+    # $libctx - value corresponding to OSSL_LIB_CTX structure or undef
+    #
+    # returns: 1 if fips is enabled, 0 otherwise
+
+Check openssl doc L<https://www.openssl.org/docs/manmaster/man3/EVP_default_properties_is_fips_enabled.html>
+
+=back
+
 =head3 Low level API: EVP_PKEY_* related functions
 
 =over
@@ -9992,6 +10009,18 @@ OSSL_LIB_CTX argument when global default library context is needed.
 
 Check openssl doc L<https://www.openssl.org/docs/manmaster/man3/OSSL_LIB_CTX_get0_global_default.html>
 
+=item * OSSL_LIB_CTX_load_config
+
+Loads a configuration file using the given libctx.
+
+    my $rv = Net::SSLeay::OSSL_LIB_CTX_load_config($libctx, $config_file);
+    # $libctx - value corresponding to OSSL_LIB_CTX structure or undef
+    # $config_file - (string) Path to config file, e.g., 'openssl.cnf'
+    #
+    # returns: (integer) 1 on success, 0 on error
+
+Check openssl doc L<https://www.openssl.org/docs/manmaster/man3/OSSL_LIB_CTX_load_config.html>
+
 =item * OSSL_PROVIDER_load
 
 Loads and initializes a provider
@@ -10007,6 +10036,18 @@ Using undef loads the provider within the global default library context.
     my $provider = Net::SSLeay::OSSL_PROVIDER_load(undef, 'legacy');
 
 Check openssl doc L<https://www.openssl.org/docs/manmaster/man3/OSSL_PROVIDER_load.html>
+
+=item * OSSL_PROVIDER_set_default_search_path
+
+Specifies the default search path that is to be used for looking for providers in the specified libctx.
+
+    my $rv = Net::SSLeay::OSSL_PROVIDER_set_default_search_path($libctx, $path);
+    # $libctx - value corresponding to OSSL_LIB_CTX structure or undef
+    # $path - (string) path to providers for $libctx
+    #
+    # returns: (integer) 1 on success, 0 on error
+
+Check openssl doc L<https://www.openssl.org/docs/manmaster/man3/OSSL_PROVIDER_set_default_search_path.html>
 
 =item * OSSL_PROVIDER_try_load
 
